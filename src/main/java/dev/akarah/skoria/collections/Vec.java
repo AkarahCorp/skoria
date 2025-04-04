@@ -4,19 +4,26 @@ import dev.akarah.skoria.util.Nullable;
 
 public class Vec<T> {
     @SuppressWarnings("unchecked")
-    private T[] inner = (T[]) new Object[] {};
-    private int len = 0;
+    T[] inner = (T[]) new Object[] {};
+    int len = 0;
 
     public static <T> Vec<T> empty() {
         return new Vec<>();
     }
 
+    @SuppressWarnings("unchecked")
+    public static <T> Vec<T> withCapacity(int capacity) {
+        var vect = new Vec<T>();
+        vect.inner = (T[]) new Object[capacity];
+        return vect;
+    }
+
+    @SuppressWarnings("unchecked")
     public void grow() {
         if (this.len == 0) {
             this.len = 1;
         }
         if (this.len >= this.inner.length) {
-            @SuppressWarnings("unchecked")
             var newArray = (T[]) new Object[this.len * 2];
 
             System.arraycopy(this.inner, 0, newArray, 0, this.inner.length);
