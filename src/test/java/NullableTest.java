@@ -2,7 +2,6 @@
 import org.junit.Test;
 
 import dev.akarah.skoria.util.Nullable;
-import dev.akarah.skoria.util.UnwrapException;
 
 public class NullableTest {
     @Test
@@ -11,7 +10,7 @@ public class NullableTest {
         assert nullable.unwrap() == 10;
     }
 
-    @Test(expected = UnwrapException.class)
+    @Test(expected = NullPointerException.class)
     public void unwrapFail() {
         var nullable = Nullable.ofNull();
         nullable.unwrap();
@@ -24,7 +23,7 @@ public class NullableTest {
         assert nullable.unwrap() == 20;
     }
 
-    @Test(expected = UnwrapException.class)
+    @Test(expected = NullPointerException.class)
     public void mapNull() {
         var nullable = Nullable.<Integer>ofNull();
         nullable = nullable.map((x) -> x * 2);
@@ -38,14 +37,14 @@ public class NullableTest {
         assert nullable.unwrap() == 20;
     }
 
-    @Test(expected = UnwrapException.class)
+    @Test(expected = NullPointerException.class)
     public void flatMapIntoNull() {
         var nullable = Nullable.of(10);
         nullable = nullable.flatMap((_) -> Nullable.ofNull());
         assert nullable.unwrap() == 20;
     }
 
-    @Test(expected = UnwrapException.class)
+    @Test(expected = NullPointerException.class)
     public void flatMapNullIntoNull() {
         var nullable = Nullable.<Integer>ofNull();
         nullable = nullable.flatMap((_) -> Nullable.ofNull());

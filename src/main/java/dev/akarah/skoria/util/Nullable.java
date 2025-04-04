@@ -46,7 +46,7 @@ public sealed interface Nullable<T> {
                 return value;
             }
             case Nullable.Empty() -> {
-                throw new UnwrapException("Attemped to invoke Nullable::unwrap on a Nullable.Empty instance");
+                throw new NullPointerException("Attemped to invoke Nullable::unwrap on a Nullable.Empty instance");
             }
         }
     }

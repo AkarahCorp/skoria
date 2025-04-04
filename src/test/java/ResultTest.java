@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 import dev.akarah.skoria.util.Result;
-import dev.akarah.skoria.util.UnwrapException;
 
 public class ResultTest {
     @Test
@@ -10,7 +9,7 @@ public class ResultTest {
         assert result.unwrap() == 10;
     }
 
-    @Test(expected = UnwrapException.class)
+    @Test(expected = NullPointerException.class)
     public void unwrapFails() {
         var result = Result.error(10);
         result.unwrap();
@@ -22,7 +21,7 @@ public class ResultTest {
         assert result.unwrapErr() == 10;
     }
 
-    @Test(expected = UnwrapException.class)
+    @Test(expected = NullPointerException.class)
     public void unwrapErrFails() {
         var result = Result.success(10);
         result.unwrapErr();

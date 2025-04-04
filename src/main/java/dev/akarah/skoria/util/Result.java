@@ -49,7 +49,7 @@ public sealed interface Result<T, E> {
                 return ok.value;
             }
             case Error<T, E> _ -> {
-                throw new UnwrapException("Attempted to call Result::unwrap on an Result.Err value.");
+                throw new NullPointerException("Attempted to call Result::unwrap on an Result.Err value.");
             }
         }
     }
@@ -57,7 +57,7 @@ public sealed interface Result<T, E> {
     default E unwrapErr() {
         switch (this) {
             case Success<T, E> _ -> {
-                throw new UnwrapException("Attempted to call Result::unwrapErr on an Result.Ok value.");
+                throw new NullPointerException("Attempted to call Result::unwrapErr on an Result.Ok value.");
             }
             case Error<T, E> err -> {
                 return err.value;
