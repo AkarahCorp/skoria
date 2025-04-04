@@ -23,8 +23,8 @@ public sealed interface Result<T, E> {
 
     default Result<T, E> map(Function<T, T> function) {
         switch (this) {
-            case Success<T, E> ok -> {
-                return new Success<>(function.apply(ok.value));
+            case Success<T, E>(T value) -> {
+                return new Success<>(function.apply(value));
             }
             case Error<T, E> err -> {
                 return err;
@@ -34,11 +34,11 @@ public sealed interface Result<T, E> {
 
     default Result<T, E> mapErr(Function<E, E> function) {
         switch (this) {
-            case Success<T, E> ok -> {
-                return ok;
+            case Success<T, E>(T value) -> {
+                return new Success<>(value);
             }
-            case Error<T, E> err -> {
-                return new Error<>(function.apply(err.value));
+            case Error<T, E>(E value) -> {
+                return new Error<>(function.apply(value));
             }
         }
     }
@@ -67,8 +67,8 @@ public sealed interface Result<T, E> {
 
     default T unwrapOr(T value) {
         switch (this) {
-            case Success<T, E> ok -> {
-                return ok.value;
+            case Success<T, E>(T resultValue) -> {
+                return resultValue;
             }
             case Error<T, E> _ -> {
                 return value;
@@ -86,5 +86,4 @@ public sealed interface Result<T, E> {
             }
         }
     }
-
 }
