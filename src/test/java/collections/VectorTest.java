@@ -55,7 +55,7 @@ public class VectorTest {
         assert vec.indexOf("b").unwrap() == 1;
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void indexOfMissing() {
         var vec = Vector.<String>empty();
         vec.addLast("a");
@@ -63,7 +63,7 @@ public class VectorTest {
         vec.addLast("c");
         vec.addLast("d");
 
-        assert vec.indexOf("e").unwrap() == null;
+        assert vec.indexOf("e").isNull();
     }
 
     @Test
@@ -77,10 +77,10 @@ public class VectorTest {
         assert vec.removeLast().unwrap().equals("d");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void removeLastNull() {
         var vec = Vector.<String>empty();
 
-        assert vec.removeLast().unwrap() == null;
+        assert vec.removeLast().isNull();
     }
 }

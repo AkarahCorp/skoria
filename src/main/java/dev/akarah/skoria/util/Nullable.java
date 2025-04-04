@@ -57,4 +57,12 @@ public sealed interface Nullable<T> {
             }
         }
     }
+
+    default boolean isPresent() {
+        return this instanceof Nullable.Present;
+    }
+
+    default boolean isNull() {
+        return this instanceof Nullable.Empty;
+    }
 }

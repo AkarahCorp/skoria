@@ -24,11 +24,11 @@ public class NullableTest {
         assert nullable.unwrap() == 20;
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void mapNull() {
         var nullable = Nullable.<Integer>ofNull();
         nullable = nullable.map((x) -> x * 2);
-        assert nullable.unwrap() == 20;
+        assert nullable.isNull();
     }
 
     @Test
@@ -38,17 +38,17 @@ public class NullableTest {
         assert nullable.unwrap() == 20;
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void flatMapIntoNull() {
         var nullable = Nullable.of(10);
         nullable = nullable.flatMap((_) -> Nullable.ofNull());
-        assert nullable.unwrap() == 20;
+        assert nullable.isNull();
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void flatMapNullIntoNull() {
         var nullable = Nullable.<Integer>ofNull();
         nullable = nullable.flatMap((_) -> Nullable.ofNull());
-        assert nullable.unwrap() == 20;
+        assert nullable.isNull();
     }
 }

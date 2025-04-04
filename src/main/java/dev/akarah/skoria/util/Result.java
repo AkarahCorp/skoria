@@ -29,6 +29,14 @@ public sealed interface Result<T, E> {
         }
     }
 
+    default boolean isSuccess() {
+        return this instanceof Result.Success;
+    }
+
+    default boolean isError() {
+        return this instanceof Result.Error;
+    }
+
     default Result<T, E> map(Function<T, T> function) {
         switch (this) {
             case Success<T, E>(T value) -> {
