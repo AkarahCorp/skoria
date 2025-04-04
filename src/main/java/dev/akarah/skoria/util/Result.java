@@ -21,6 +21,14 @@ public sealed interface Result<T, E> {
         return new Result.Error<>(value);
     }
 
+    static <T> Result<T, Exception> fromExceptional(Supplier<T> value) {
+        try {
+            return Result.success(value.get());
+        } catch (Exception e) {
+            return Result.error(e);
+        }
+    }
+
     default Result<T, E> map(Function<T, T> function) {
         switch (this) {
             case Success<T, E>(T value) -> {

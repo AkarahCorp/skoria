@@ -42,4 +42,20 @@ public class ResultTest {
         result = result.map((x) -> x);
         assert result.unwrapErr() == 10;
     }
+
+    @Test
+    public void fromExceptional() {
+        var result = Result.fromExceptional(() -> {
+            return 10;
+        });
+        assert result.unwrap() == 10;
+    }
+
+    @Test
+    public void fromExceptionalError() {
+        var result = Result.fromExceptional(() -> {
+            throw new RuntimeException();
+        });
+        assert result.unwrapErr().getClass().equals(RuntimeException.class);
+    }
 }
