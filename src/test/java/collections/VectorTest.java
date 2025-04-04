@@ -1,19 +1,19 @@
 package collections;
 
 import org.junit.Test;
-import dev.akarah.skoria.collections.Vec;
+import dev.akarah.skoria.collections.Vector;
 
-public class VecTest {
+public class VectorTest {
     @Test
     public void simplePush() {
-        var vec = Vec.<Integer>empty();
+        var vec = Vector.<Integer>empty();
         vec.push(1);
         assert vec.get(0).unwrap() == 1;
     }
 
     @Test
     public void simpleSet() {
-        var vec = Vec.<Integer>empty();
+        var vec = Vector.<Integer>empty();
         vec.push(0);
         vec.push(0);
 
@@ -24,7 +24,7 @@ public class VecTest {
 
     @Test
     public void simpleInsert() {
-        var vec = Vec.<Integer>empty();
+        var vec = Vector.<Integer>empty();
         vec.push(1);
         vec.push(3);
 
@@ -36,7 +36,7 @@ public class VecTest {
 
     @Test
     public void simpleRemove() {
-        var vec = Vec.<Integer>empty();
+        var vec = Vector.<Integer>empty();
         vec.push(1);
         vec.push(2);
         vec.push(2);

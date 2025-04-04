@@ -2,18 +2,18 @@ package dev.akarah.skoria.collections;
 
 import dev.akarah.skoria.util.Nullable;
 
-public class Vec<T> {
+public class Vector<T> {
     @SuppressWarnings("unchecked")
     T[] inner = (T[]) new Object[] {};
     int len = 0;
 
-    public static <T> Vec<T> empty() {
-        return new Vec<>();
+    public static <T> Vector<T> empty() {
+        return new Vector<>();
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> Vec<T> withCapacity(int capacity) {
-        var vect = new Vec<T>();
+    public static <T> Vector<T> withCapacity(int capacity) {
+        var vect = new Vector<T>();
         vect.inner = (T[]) new Object[capacity];
         return vect;
     }
