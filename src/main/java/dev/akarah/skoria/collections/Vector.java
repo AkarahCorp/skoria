@@ -19,7 +19,7 @@ public class Vector<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public void grow() {
+    private void grow() {
         if (this.len == 0) {
             this.len = 1;
         }
@@ -31,11 +31,26 @@ public class Vector<T> {
         }
     }
 
-    public void push(T value) {
+    public void addLast(T value) {
         this.len += 1;
         this.grow();
 
         this.inner[len - 1] = value;
+    }
+
+    public void addFirst(T value) {
+        this.insert(0, value);
+    }
+
+    public Nullable<T> removeLast() {
+        if (this.len == 0) {
+            return Nullable.ofNull();
+        }
+
+        this.len -= 1;
+        var oldValue = this.inner[this.len];
+        this.inner[this.len] = null;
+        return Nullable.of(oldValue);
     }
 
     public void set(int index, T value) {
@@ -74,5 +89,19 @@ public class Vector<T> {
         var tmp = this.inner[index];
         System.arraycopy(this.inner, index, this.inner, index - 1, this.len - index);
         return Nullable.of(tmp);
+    }
+
+    public Nullable<Integer> indexOf(T input) {
+        for (int i = 0; i < this.len; i++) {
+            var value = this.inner[i];
+            if (value.equals(input)) {
+                return Nullable.of(i);
+            }
+        }
+        return Nullable.ofNull();
+    }
+
+    public boolean isEmpty() {
+        return this.len == 0;
     }
 }

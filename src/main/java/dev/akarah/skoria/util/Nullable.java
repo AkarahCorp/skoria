@@ -10,6 +10,13 @@ public sealed interface Nullable<T> {
     }
 
     static <T> Nullable<T> of(T value) {
+        if (value == null) {
+            return new Empty<>();
+        }
+        return new Present<>(value);
+    }
+
+    static <T> Nullable<T> ofNonNull(T value) {
         assert value != null;
         return new Present<>(value);
     }
