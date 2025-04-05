@@ -1,6 +1,7 @@
 package dev.akarah.skoria.util;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * `Nullable` is a safe interface that allows for empty values, while requiring checks.
@@ -29,6 +30,24 @@ public sealed interface Nullable<T> {
             return new Empty<>();
         }
         return new Present<>(value);
+    }
+
+    /**
+     * Creates a new Nullable value by calling the supplier. NullPointerExceptions are handled by returning Nullable.Empty.
+     * @param <T> The type of the Nullable.
+     * @param value If null, a Nullable.Empty is returned. Otherwise, a Nullable.Present wrapping the value is returned.
+     * @return The returned value, either Nullable.Empty or Nullable.Present.
+     */
+    static <T> Nullable<T> of(Supplier<T> value) {
+        try {
+            var result = value.get();
+            if (result == null) {
+                return new Empty<>();
+            }
+            return new Present<>(result);
+        } catch (NullPointerException e) {
+            return new Empty<>();
+        }
     }
 
     /**
