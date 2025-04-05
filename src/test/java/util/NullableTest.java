@@ -41,14 +41,14 @@ public class NullableTest {
     @Test
     public void flatMapIntoNull() {
         var nullable = Nullable.of(10);
-        nullable = nullable.flatMap((_) -> Nullable.ofNull());
+        nullable = nullable.flatMap((ignored) -> Nullable.ofNull());
         assert nullable.isNull();
     }
 
     @Test
     public void flatMapNullIntoNull() {
         var nullable = Nullable.<Integer>ofNull();
-        nullable = nullable.flatMap((_) -> Nullable.ofNull());
+        nullable = nullable.flatMap((ignored) -> Nullable.ofNull());
         assert nullable.isNull();
     }
 }
